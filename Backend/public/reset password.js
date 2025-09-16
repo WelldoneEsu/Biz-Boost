@@ -1,4 +1,4 @@
-  const API  = 'https://biz-boost.onrender.com';
+  const API  = 'https://biz-boost.onrender.com/api';
   
   const form = document.getElementById('resetForm');
   const emailError = document.getElementById('emailError');

@@ -1,4 +1,4 @@
-const API  = 'https://biz-boost.onrender.com';
+const API  = 'https://biz-boost.onrender.com/api';
 
 const signinForm = document.getElementById("signinForm");
 signinForm.addEventListener("submit", async function (e) {

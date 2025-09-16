@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const supplierSchema = new mongoose.Schema({
-  supplierName: {
+  name: {           
     type: String,
     required: true,
   },
@@ -10,7 +10,7 @@ const supplierSchema = new mongoose.Schema({
     required: true,
   },
   leadTime: {
-    type: Number,
+    type: String, 
     required: true,
   },
   rating: {
@@ -21,8 +21,8 @@ const supplierSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Active', 'Inactive', 'On Hold'],
-    default: 'Active',
+    enum: ['Pending', 'Purchased', 'Cancelled'], 
+    default: 'Pending',
   },
 }, { timestamps: true });
 

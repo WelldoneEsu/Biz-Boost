@@ -11,7 +11,7 @@
     category: "Category A"
   }
 ];*/
-const API  = 'https://biz-boost.onrender.com';
+const API  = 'https://biz-boost.onrender.com/api';
 
 let products = [];
 

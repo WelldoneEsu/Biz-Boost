@@ -1,7 +1,7 @@
 // suppliers.js
 
 // Supplier Data Store
-const API  = 'https://biz-boost.onrender.com';
+const API  = 'https://biz-boost.onrender.com/api';
 
 let suppliers = [];
 let purchases = [];

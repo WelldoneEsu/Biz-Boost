@@ -1,5 +1,5 @@
 // sales.js
-const API  = 'https://biz-boost.onrender.com';
+const API  = 'https://biz-boost.onrender.com/api';
 
 document.addEventListener("DOMContentLoaded", () => {
   // Modal Elements

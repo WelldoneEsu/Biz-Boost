@@ -19,11 +19,18 @@ const productSchema = new mongoose.Schema({
   expiryDate: {
     type: Date,
     required: [true, 'Please add an expiry date'],
+    validate: {
+      validator: function (date) {
+        return date > Date.now();
+      },
+      message: 'Expiry date must be in the future',
+    },
   },
   category: {
-    type: String,
-    required: [true, 'Please add a product category'],
-  },
+  type: String,
+  enum: ['Category A', 'Category B'],
+  required: true,
+},
   unitPrice: {
     type: Number,
     required: [true, 'Please add a unit price'],

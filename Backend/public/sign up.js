@@ -1,10 +1,11 @@
 const API = 'https://biz-boost.onrender.com/api/auth/signup'; 
 
 const signupForm = document.getElementById("signupForm");
-signupForm.addEventListener("submit", function (e) {
-    e.preventDefault(); // stop default submit
 
-    // get form values
+signupForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // prevent default form submission
+
+    // Get form input elements
     const firstName = document.getElementById("firstName");
     const lastName = document.getElementById("lastName");
     const bName = document.getElementById("bName");
@@ -14,10 +15,10 @@ signupForm.addEventListener("submit", function (e) {
     const cPassword = document.getElementById("cPassword");
     const terms = document.getElementById("terms");
 
-    // error elements
+    // Error display elements 
     const firstNameError = document.getElementById("firstNameError");
     const lastNameError = document.getElementById("lastNameError");
-    const bNameError = document.getElementById("BnameError");
+    const bNameError = document.getElementById("bNameError");
     const emailError = document.getElementById("emailError");
     const phoneError = document.getElementById("phoneError");
     const pwordError = document.getElementById("pwordError");
@@ -26,9 +27,9 @@ signupForm.addEventListener("submit", function (e) {
 
     let valid = true;
 
-    // --- VALIDATIONS ---
+    // --- VALIDATION SECTION ---
 
-    if (firstName.value.trim() === "" || firstName.value.length < 2) {
+    if (firstName.value.trim() === "" || firstName.value.trim().length < 2) {
         firstNameError.textContent = "First name is required and must be at least 2 characters.";
         firstNameError.style.display = "block";
         firstName.classList.add("input-error");
@@ -39,7 +40,7 @@ signupForm.addEventListener("submit", function (e) {
         firstName.classList.remove("input-error");
     }
 
-    if (lastName.value.trim() === "" || lastName.value.length < 2) {
+    if (lastName.value.trim() === "" || lastName.value.trim().length < 2) {
         lastNameError.textContent = "Last name is required and must be at least 2 characters.";
         lastNameError.style.display = "block";
         lastName.classList.add("input-error");
@@ -50,7 +51,7 @@ signupForm.addEventListener("submit", function (e) {
         lastName.classList.remove("input-error");
     }
 
-    if (bName.value.trim() === "" || bName.value.length < 2) {
+    if (bName.value.trim() === "" || bName.value.trim().length < 2) {
         bNameError.textContent = "Business name is required and must be at least 2 characters.";
         bNameError.style.display = "block";
         bName.classList.add("input-error");
@@ -61,7 +62,7 @@ signupForm.addEventListener("submit", function (e) {
         bName.classList.remove("input-error");
     }
 
-    if (!email.value.includes("@") || !email.value.includes(".com")) {
+    if (!email.value.trim().includes("@") || !email.value.trim().includes(".com")) {
         emailError.textContent = "Valid email is required.";
         emailError.style.display = "block";
         email.classList.add("input-error");
@@ -72,7 +73,7 @@ signupForm.addEventListener("submit", function (e) {
         email.classList.remove("input-error");
     }
 
-    if (phoneNumber.value.length !== 11) {
+    if (phoneNumber.value.trim().length !== 11) {
         phoneError.textContent = "Phone number must be exactly 11 digits.";
         phoneError.style.display = "block";
         phoneNumber.classList.add("input-error");
@@ -116,16 +117,18 @@ signupForm.addEventListener("submit", function (e) {
         terms.classList.remove("input-error");
     }
 
-    // --- BACKEND SUBMISSION ---
+    // --- SUBMIT TO BACKEND IF VALID ---
     if (valid) {
         const payload = {
             firstName: firstName.value.trim(),
             lastName: lastName.value.trim(),
             businessName: bName.value.trim(),
             email: email.value.trim(),
-            phone: phoneNumber.value.trim(),
+            phoneNumber: phoneNumber.value.trim(),
             password: password.value
         };
+
+        console.log("Submitting payload:", payload); // ✅ Debug log
 
         fetch(API, {
             method: "POST",
@@ -138,7 +141,7 @@ signupForm.addEventListener("submit", function (e) {
         .then(data => {
             if (data.success) {
                 alert("Signup successful!");
-                window.location.href = "sign in.html"; // ✅ Redirect
+                window.location.href = "sign in.html";
             } else {
                 alert(data.message || "Signup failed. Please try again.");
             }
@@ -150,7 +153,8 @@ signupForm.addEventListener("submit", function (e) {
     }
 });
 
-// --- HAMBURGER MENU TOGGLE ---
+
+// --- HAMBURGER MENU ---
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 

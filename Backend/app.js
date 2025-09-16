@@ -13,6 +13,7 @@ const connectDB = require('./config/db');
 connectDB();
 
 // Route imports
+const Message = require('./models/Message');
 const authRoutes = require('./routes/authRoutes');
 const salesRoutes = require('./routes/salesRoutes');
 const settingsRoutes = require('./routes/settingsRoutes');
@@ -145,19 +146,15 @@ app.get('/login', (req, res) => {
 });
 
 // ✅ Form submission example
-app.post('/submit', (req, res) => {
-    try {
-        const { name, email, comments } = req.body;
-        console.log('Received form submission:', { name, email, comments });
+app.post('/submit', async (req, res) => {
+  try {
+    const { name, email, comments } = req.body;
 
-        // Check for missing or empty data
-        if (!name || !email || !comments) {
-            console.error('Form submission failed: Missing fields.');
-            return res.status(400).json({ error: 'Missing name, email, or comments.' });
-        }
+    const newMessage = new Message({ name, email, comments });
+    await newMessage.save();
 
         // Acknowledge the request
-        res.status(200).send('Received sucessfully');
+        res.status(200).send('Received successfully');
     } catch (error) {
         console.error('Error in /submit route:', error);
         res.status(500).json({ error: 'Internal Server Error' });
